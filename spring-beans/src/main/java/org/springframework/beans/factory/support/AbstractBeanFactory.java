@@ -330,6 +330,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 
 				// Create bean instance.
 				// 创建bean的实例，创建分成三类，1. 单例singleton，2. Prototype 3. 其他
+				// 匿名内部类创建一个
 				if (mbd.isSingleton()) {
 					sharedInstance = getSingleton(beanName, () -> {
 						try {
@@ -1432,6 +1433,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 								"Could not resolve parent bean definition '" + bd.getParentName() + "'", ex);
 					}
 					// Deep copy with overridden values.
+					// 核心代码，合并的主体，2次赋值
 					mbd = new RootBeanDefinition(pbd);
 					mbd.overrideFrom(bd);
 				}
